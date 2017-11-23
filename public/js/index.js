@@ -1,8 +1,10 @@
 let socket = io();
 
 function scrollToBottom() {
+	// 
 	let messages = $('#messages');
 	let newMessage = messages.children('li:last-child')
+	// 
 	let clientHeight = messages.prop('clientHeight');
 	let scrollTop = messages.prop('scrollTop');
 	let scrollHeight = messages.prop('scrollHeight');
@@ -24,7 +26,7 @@ socket.on('disconected', function () {
 	});
 
 socket.on('newMessage', function(message) {
-	let formattedTime = moment(message.createdAt).format('h: mm a');
+	let formattedTime = moment(message.createdAt).format('h:mm a');
 	let template = $('#message-template').html();
 	let html = Mustache.render(template, {
 		text: message.text,
@@ -45,7 +47,7 @@ socket.on('newLocatonMessage', function(message) {
 		createdAt: formattedTime
 	});
 
-	$("#messges").append(html)
+	$("#messages").append(html)
 	scrollToBottom();
 });
 
@@ -80,5 +82,5 @@ locationButton.on("click", function () {
 		locationButton.removeAttr('disabled').text('Send location');
 		alert('Unable to fetch location');
 	});
-});
+  });
 
