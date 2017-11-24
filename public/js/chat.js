@@ -33,24 +33,24 @@ socket.on('newMessage', function (message) {
     createdAt: formattedTime
   });
 
-  jQuery('#messages').append(html);
+  $('#messages').append(html);
   scrollToBottom();
 });
 
 socket.on('newLocationMessage', function (message) {
   var formattedTime = moment(message.createdAt).format('h:mm a');
-  var template = jQuery('#location-message-template').html();
+  var template = $('#location-message-template').html();
   var html = Mustache.render(template, {
     from: message.from,
     url: message.url,
     createdAt: formattedTime
   });
 
-  jQuery('#messages').append(html);
+  $('#messages').append(html);
   scrollToBottom();
 });
 
-jQuery('#message-form').on('submit', function (e) {
+$('#message-form').on('submit', function (e) {
   e.preventDefault();
 
   var messageTextbox = jQuery('[name=message]');
@@ -63,7 +63,7 @@ jQuery('#message-form').on('submit', function (e) {
   });
 });
 
-var locationButton = jQuery('#send-location');
+var locationButton = $('#send-location');
 locationButton.on('click', function () {
   if (!navigator.geolocation) {
     return alert('Geolocation not supported by your browser.');
